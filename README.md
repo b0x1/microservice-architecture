@@ -14,7 +14,6 @@ mvn clean install
 
 ### 2. Use archetype to generate a project
 ```bash
-# In the archetype folder
 mvn archetype:generate -DarchetypeGroupId=com.gepardec \
                        -DarchetypeArtifactId=microservice-archetype \
                        -DarchetypeVersion=1.0.0-SNAPSHOT \
