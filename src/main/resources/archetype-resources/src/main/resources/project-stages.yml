@@ -1,0 +1,70 @@
+# Necessary because config set via 'swarm.jaeger.*', breaks jaeger integration
+JAEGER_SERVICE_NAME: ${project.artifactId}
+JAEGER_AGENT_HOST: localhost
+JAEGER_AGENT_PORT: 6831
+JAEGER_REPORTER_LOG_SPANS: true
+JAEGER_REPORTER_FLUSH_INTERVAL: 100
+JAEGER_SAMPLER_TYPE: const
+JAEGER_SAMPLER_PARAM: 1
+
+swarm:
+  http:
+    port: 8080
+  contex:
+    path: "/"
+  logging:
+---
+project:
+  stage: dev
+swarm:
+  logging: DEBUG
+  microprofile:
+    config:
+      config-sources:
+        KEY:
+          properties:
+            some.secret.data: "keep this a secret!"
+            service.map.data: >
+              key1 : val1 |
+              key2 : val2 |
+              key3 : val3
+---
+project:
+  stage: test
+swarm:
+  logging: INFO
+  microprofile:
+    config:
+      config-sources:
+        KEY:
+          properties:
+            some.secret.data: "keep this a secret!"
+            service.map.data: >
+              key1 : val1 |
+              key2 : val2 |
+              key3 : val3
+---
+project:
+  stage: openshift
+swarm:
+  logging:
+    custom-handlers:
+      SYSLOGGER:
+        attribute-class: org.jboss.logmanager.handlers.SyslogHandler
+        module: org.jboss.logmanager
+        properties:
+          serverHostname: logServer
+          hostname: ${project.artifactId}
+          port: 514
+          protocol: UDP
+    root-logger:
+      level: INFO
+      handlers:
+        - CONSOLE
+        - SYSLOGGER
+  # microprofile-config sources configuration
+  microprofile:
+    config:
+      config-sources:
+        KEY:
+          dir: "/config"

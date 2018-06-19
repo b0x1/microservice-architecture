@@ -1,0 +1,58 @@
+spec:
+  strategy:
+    type: Rolling
+    rollingParams:
+      updatePeriodSeconds: 5
+      intervalSeconds: 5
+      timeoutSeconds: 120
+  replicas: 1
+  template:
+    spec:
+      volumes:
+        - name: config
+          secret:
+            secretName: secret
+      containers:
+        - name: ${project.artifactId}
+          resources:
+            requests:
+              cpu: "0.2"
+              memory: 128Mi
+            limits:
+              cpu: "1.0"
+              memory: 256Mi
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+              scheme: HTTP
+            successThreshold: 2
+            failureThreshold: 10
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+              scheme: HTTP
+            successThreshold: 1
+            failureThreshold: 10
+            initialDelaySeconds: 60
+            periodSeconds: 30
+            timeoutSeconds: 5
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: config
+              mountPath: "/config"
+          env:
+              # Necessary, otherwise java console won't work in Openshift
+            - name: "AB_JOLOKIA_HTTPS"
+              value: "true"
+            - name: "AB_PROMETHEUS_OFF"
+              value: "true"
+            - name: "JAVA_MAX_MEM_RATIO"
+              value: "100"
+            - name: "JAVA_OPTIONS"
+              value: "-Dswarm.project.stage=openshift"

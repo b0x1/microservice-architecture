@@ -1,0 +1,8 @@
+spec:
+  type: "ClusterIP"
+  sessionAffinity: "None"
+  ports:
+    - name: ${project.artifactId}
+      protocol: "TCP"
+      port: 8080
+      targetPort: 8080
