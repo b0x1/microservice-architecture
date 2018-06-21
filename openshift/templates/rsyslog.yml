@@ -1,0 +1,130 @@
+kind: "Template"
+apiVersion: "v1"
+metadata:
+  name: "RSYSLOG"
+  annotations:
+    openshift.io/display-name: "RSYSLOG Server"
+    description: "RSYSLOG Server"
+
+parameters:
+  - name: "APP_NAME"
+    displayName: "App Name"
+    description: "The name of the app. All objects are labelled with this name."
+    required: true
+
+  - name: "SERVICE_NAME"
+    displayName: "Service Name"
+    description: "The name of the rsyslog service."
+    required: true
+
+  - name: "GIT_URL"
+    displayName: "Git URL"
+    description: "The Git repository for building the service from a Dockerfile"
+    required: true
+
+  - name: "GIT_REF"
+    displayName: "Git Reference"
+    description: "The Git reference (branch / tag) for building the service"
+    required: true
+
+  - name: "GIT_CONTEXT_DIR"
+    displayName: "Context Dir"
+    description: "The context directory of the git repository for building the service"
+    required: true
+
+objects:
+  - kind: "Service"
+    apiVersion: "v1"
+    metadata:
+      name: "${SERVICE_NAME}"
+      labels:
+        app: "${APP_NAME}"
+    spec:
+      ports:
+      - name: "${SERVICE_NAME}-tcp"
+        protocol: "TCP"
+        port: 10514
+        targetPort: 10514
+      - name: "${SERVICE_NAME}-udp"
+        protocol: "UDP"
+        port: 10514
+        targetPort: 10514
+      selector:
+        name:  "${SERVICE_NAME}"
+      type: "ClusterIP"
+      sessionAffinity: "None"
+
+  - kind: "BuildConfig"
+    apiVersion: "v1"
+    metadata:
+      name: "${SERVICE_NAME}"
+      labels:
+        name: "${SERVICE_NAME}"
+        app: "${APP_NAME}"
+    spec:
+      source:
+        type: "Git"
+        git:
+          uri: "${GIT_URL}"
+          ref: "${GIT_REF}"
+        contextDir: "${GIT_CONTEXT_DIR}"
+      strategy:
+        type: "Docker"
+        dockerStrategy:
+          env:
+            - name: "BUILD_LOGLEVEL"
+              value: "5"
+      output:
+        to:
+          kind: "ImageStreamTag"
+          name: "${SERVICE_NAME}:latest"
+          labels:
+            app: "${APP}"
+      triggers:
+        - type: "ConfigChange"
+
+  - kind: "ImageStream"
+    apiVersion: "v1"
+    metadata:
+      name: "${SERVICE_NAME}"
+      labels:
+        app: "${APP_NAME}"
+
+  - kind: "DeploymentConfig"
+    apiVersion: "v1"
+    metadata:
+      name: "${SERVICE_NAME}"
+      annotations:
+        template.alpha.openshift.io/wait-for-ready: "true"
+      labels:
+        app: "${APP_NAME}"
+    spec:
+      strategy:
+        type: "Recreate"
+      replicas: "1"
+      selector:
+        name: "${SERVICE_NAME}"
+      triggers:
+        - type: "ConfigChange"
+        - type: "ImageChange"
+          imageChangeParams:
+            automatic: true
+            containerNames:
+              - "${SERVICE_NAME}"
+            from:
+              kind: "ImageStreamTag"
+              name: "${SERVICE_NAME}:latest"
+      template:
+        metadata:
+          labels:
+            app: "${APP_NAME}"
+            name: "${SERVICE_NAME}"
+        spec:
+          containers:
+            - name: "${SERVICE_NAME}"
+              imagePullPolicy: Always
+              ports:
+                - containerPort: 10514
+                  protocol: TCP
+                - containerPort: 10514
+                  protocol: UDP
