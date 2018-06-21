@@ -56,3 +56,11 @@ spec:
               value: "100"
             - name: "JAVA_OPTIONS"
               value: "-Dswarm.project.stage=openshift"
+            - name: "JAEGER_HOST"
+              value: "jaeger-agent"
+            - name: "JAEGER_PORT"
+              value: 6831
+            - name: "SYSLOG_SERVER"
+              value: rsyslog
+            - name: "SYSLOG_PORT"
+              value: 10514
