@@ -2,8 +2,6 @@
 
 A Maven archetype to bootstrap a Microservice based on Wildfly Swarm.
 
-In collaboration with [@cchet](https://github.com/cchet), who has written most of the code this archetype is based on.
-
 ## Usage
 
 ### 1. Install the archetype into 

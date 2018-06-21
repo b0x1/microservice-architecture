@@ -1,5 +1,7 @@
 FROM debian:jessie
 
+# From: https://github.com/helderco/docker-rsyslog
+
 RUN apt-get update && \
     apt-get install rsyslog --no-install-recommends -y && \
     apt-get clean && \
