@@ -7,7 +7,7 @@
 	<version>${version}</version>
 	<packaging>war</packaging>
 
-	<name>A Maven Microservice Project</name>
+	<name>${project-name}</name>
 
 	<properties>
 		<!-- Build Properties -->

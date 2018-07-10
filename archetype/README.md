@@ -18,6 +18,7 @@ mvn archetype:generate -DarchetypeGroupId=com.gepardec \
                        -DgroupId=com.example \
                        -DartifactId=my-example-app \
                        -Dversion=1.0.0-SNAPSHOT \
+                       -Dproject-name="An Example Project" \
                        -DinteractiveMode=false
 ```
 

@@ -10,6 +10,9 @@
     <requiredProperty key="wildfly-swarm-version">
       <defaultValue>2018.5.0</defaultValue>
     </requiredProperty>
+    <requiredProperty key="project-name">
+      <defaultValue>A Maven Microservice Project</defaultValue>
+    </requiredProperty>
   </requiredProperties>
 
   <fileSets>
