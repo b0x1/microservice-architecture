@@ -44,11 +44,11 @@ public class ExampleRestTest {
     @RunAsClient
     public void testRest() {
         // -- Given --
-        Boolean result = exampleRest.createExample(new ExampleDto());
+        String result = exampleRest.createExample(new ExampleDto());
 
         // -- Then --
         Assert.assertNotNull(result);
-        Assert.assertTrue(result);
+        Assert.assertEquals("val1", result);
     }
 
     @Deployment

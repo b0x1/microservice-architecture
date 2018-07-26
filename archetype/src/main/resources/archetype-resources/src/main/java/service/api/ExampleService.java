@@ -6,5 +6,5 @@ package ${package}.service.api;
 import ${package}.service.model.Example;
 
 public interface ExampleService {
-    Boolean createExample(Example example);
+    String createExample(Example example);
 }

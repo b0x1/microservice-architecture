@@ -24,9 +24,9 @@ public class ExampleServiceImpl implements ExampleService {
 	private ExampleMap exampleMap;
 
 	@Override
-	public Boolean createExample(Example example) {
+	public String createExample(Example example) {
 		LOG.info(exampleMap.toString());
 
-		return true;
+		return exampleMap.get("key1");
 	}
 }

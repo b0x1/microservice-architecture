@@ -21,5 +21,5 @@ public interface ExampleRest {
 	@Path("create")
 	@Produces({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON})
 	@Consumes(MediaType.APPLICATION_JSON)
-	Boolean createExample(@NotNull ExampleDto exampleDto);
+	String createExample(@NotNull ExampleDto exampleDto);
 }

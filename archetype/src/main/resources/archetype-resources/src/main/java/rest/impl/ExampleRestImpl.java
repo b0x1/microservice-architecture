@@ -22,7 +22,7 @@ public class ExampleRestImpl implements ExampleRest {
 	private ExampleService exampleService;
 
 	@Override
-	public Boolean createExample(@NotNull ExampleDto exampleDto) {
+	public String createExample(@NotNull ExampleDto exampleDto) {
 		return exampleService.createExample(mapper.map(exampleDto, Example.class));
 	}
 }
