@@ -7,8 +7,8 @@
   <requiredProperties>
     <!-- Dots cannot be used in keys as they are Velocity properties
          cf. https://maven.apache.org/archetype/maven-archetype-plugin/specification/archetype-metadata.html -->
-    <requiredProperty key="wildfly-swarm-version">
-      <defaultValue>2018.5.0</defaultValue>
+    <requiredProperty key="thorntail-version">
+      <defaultValue>2.0.0.Final</defaultValue>
     </requiredProperty>
     <requiredProperty key="project-name">
       <defaultValue>A Maven Microservice Project</defaultValue>
