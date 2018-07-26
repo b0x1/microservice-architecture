@@ -7,4 +7,5 @@ import ${package}.service.model.Example;
 
 public interface ExampleService {
     String createExample(Example example);
+    String getException();
 }

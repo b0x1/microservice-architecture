@@ -19,7 +19,13 @@ public interface ExampleRest {
 	@ApiOperation("Create an Example object")
 	@POST
 	@Path("create")
-	@Produces({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON})
+	@Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
 	@Consumes(MediaType.APPLICATION_JSON)
 	String createExample(@NotNull ExampleDto exampleDto);
+
+	@ApiOperation("Throw an exception")
+	@GET
+	@Path("exception")
+	@Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN, })
+	String getException();
 }

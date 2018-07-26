@@ -6,6 +6,7 @@ package ${package}.service.impl;
 import ${package}.service.model.Example;
 import ${package}.service.model.ExampleMap;
 import ${package}.service.api.ExampleService;
+import ${package}.service.exception.ServiceException;
 import io.opentracing.contrib.cdi.Traced;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.slf4j.Logger;
@@ -28,5 +29,12 @@ public class ExampleServiceImpl implements ExampleService {
 		LOG.info(exampleMap.toString());
 
 		return exampleMap.get("key1");
+	}
+
+	@Override
+	public String getException() {
+		LOG.warn("Exception is intentional.");
+
+		throw new ServiceException("You are exceptional.");
 	}
 }

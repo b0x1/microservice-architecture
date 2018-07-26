@@ -25,4 +25,10 @@ public class ExampleRestImpl implements ExampleRest {
 	public String createExample(@NotNull ExampleDto exampleDto) {
 		return exampleService.createExample(mapper.map(exampleDto, Example.class));
 	}
+
+	@Override
+	public String getException() {
+		return exampleService.getException();
+	}
+
 }
