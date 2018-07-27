@@ -4,7 +4,7 @@ A Maven archetype to bootstrap a Microservice based on Wildfly Swarm.
 
 ## Usage
 
-### 1. Install the archetype into 
+### 1. Install the archetype into local Maven repository
 ```bash
 # In the archetype folder
 mvn clean install
@@ -12,6 +12,7 @@ mvn clean install
 
 ### 2. Use archetype to generate a project
 ```bash
+# In the folder where you want to generate your new project
 mvn archetype:generate -DarchetypeGroupId=com.gepardec \
                        -DarchetypeArtifactId=microservice-archetype \
                        -DarchetypeVersion=1.0.0-SNAPSHOT \
@@ -33,7 +34,9 @@ mvn clean test
 mvn wildfly-swarm:run -Dswarm.project.stage=dev -Dmaven.test.skip=true
 ```
 
-### 5. Run in OpenShift
+### 5. Run in OpenShift (v3.5)
+For v3.6+ cf https://maven.fabric8.io/#openshift-compatibility
+
 ```bash
 mvn fabric8:run -Pfabric8 -Dmaven.test.skip=true
 ```
