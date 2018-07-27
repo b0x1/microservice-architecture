@@ -6,6 +6,7 @@ package ${package}.rest.api;
 import ${package}.rest.model.ExampleDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -24,6 +25,7 @@ public interface ExampleRest {
 	String createExample(@NotNull ExampleDto exampleDto);
 
 	@ApiOperation("Throw an exception")
+	@ApiResponse(code=500, message="Intentional exception")
 	@GET
 	@Path("exception")
 	@Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN, })
