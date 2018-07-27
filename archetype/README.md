@@ -34,8 +34,7 @@ mvn clean test
 mvn wildfly-swarm:run -Dswarm.project.stage=dev -Dmaven.test.skip=true
 ```
 
-### 5. Run in OpenShift (v3.5)
-For v3.6+ cf https://maven.fabric8.io/#openshift-compatibility
+### 5. Run in OpenShift
 
 ```bash
 mvn fabric8:run -Pfabric8 -Dmaven.test.skip=true
