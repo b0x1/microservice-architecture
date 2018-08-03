@@ -21,7 +21,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.io.File;
 import java.net.URL;
 
@@ -31,18 +33,22 @@ public class ExampleRestTest {
     @ArquillianResource
     private URL deploymentUrl;
 
+    private WebTarget webTarget;
+
     private ExampleRest exampleRest;
+    private final String ENDPOINT = "/rest-api";
 
     @Before
     public void before() {
-        exampleRest = ProxyBuilder.builder(ExampleRest.class, ClientBuilder.newClient().target(deploymentUrl + "/rest-api"))
-                                   .defaultConsumes(MediaType.APPLICATION_JSON)
-                                   .build();
+        webTarget = ClientBuilder.newClient().target(deploymentUrl + ENDPOINT);
+        exampleRest = ProxyBuilder.builder(ExampleRest.class, webTarget)
+                .defaultConsumes(MediaType.APPLICATION_JSON)
+                .build();
     }
 
     @Test
     @RunAsClient
-    public void testRest() {
+    public void testConfigMap() {
         // -- Given --
         String result = exampleRest.createExample(new ExampleDto());
 
@@ -51,17 +57,28 @@ public class ExampleRestTest {
         Assert.assertEquals("val1", result);
     }
 
+
+    @Test
+    @RunAsClient
+    public void testExceptionHandling() {
+        // -- When --
+        Response result = webTarget.path("/endpoint/exception").request().get();
+
+        // -- Then --
+        Assert.assertEquals(500, result.getStatus());
+    }
+
     @Deployment
     public static Archive createDeployment() {
         Archive archive = ShrinkWrap.create(WebArchive.class, "test.war")
-                .addPackages(true, "${package}")
+                .addPackages(true, "com.example")
                 .addAsLibraries(
                         Maven.resolver()
-                             .loadPomFromFile("pom.xml")
-                             .importCompileAndRuntimeDependencies()
-                             .resolve()
-                             .withTransitivity()
-                             .asFile())
+                                .loadPomFromFile("pom.xml")
+                                .importCompileAndRuntimeDependencies()
+                                .resolve()
+                                .withTransitivity()
+                                .asFile())
                 .addAsResource("META-INF/beans.xml")
                 .addAsResource("META-INF/services/org.eclipse.microprofile.config.spi.Converter")
                 .addAsResource("project-stages.yml");
