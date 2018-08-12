@@ -1,6 +1,6 @@
 # Maven Archetype for Microservice Architecture
 
-A Maven archetype to bootstrap a Microservice based on Wildfly Swarm.
+A Maven archetype to bootstrap a microservice based on [Thorntail](https://thorntail.io/).
 
 ## Usage
 
@@ -29,9 +29,9 @@ mvn archetype:generate -DarchetypeGroupId=com.gepardec \
 mvn clean test
 ```
 
-### 4. Run the Wildfly Swarm project
+### 4. Run the Thorntail project
 ```bash
-mvn wildfly-swarm:run -Dswarm.project.stage=dev -Dmaven.test.skip=true
+mvn thorntail:run -Dswarm.project.stage=dev -Dmaven.test.skip=true
 ```
 
 ### 5. Run in OpenShift

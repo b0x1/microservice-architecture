@@ -1,6 +1,6 @@
 # Maven Archetype for Microservice Architecture
 
-A Maven archetype to bootstrap a Microservice based on Wildfly Swarm.
+A Maven archetype to bootstrap a microservice based on [Thorntail](https://thorntail.io/).
 
 In collaboration with [@cchet](https://github.com/cchet), who has written most of the code this project is based on.
 

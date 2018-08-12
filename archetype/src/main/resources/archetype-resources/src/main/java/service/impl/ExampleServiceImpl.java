@@ -4,7 +4,6 @@
 package ${package}.service.impl;
 
 import ${package}.service.model.Example;
-import ${package}.service.model.ExampleMap;
 import ${package}.service.api.ExampleService;
 import ${package}.service.exception.ServiceException;
 import io.opentracing.contrib.cdi.Traced;
@@ -22,13 +21,16 @@ public class ExampleServiceImpl implements ExampleService {
 	Logger LOG;
 
 	@Inject @ConfigProperty(name="service.map.data")
-	private ExampleMap exampleMap;
+	private Example example;
 
 	@Override
-	public String createExample(Example example) {
-		LOG.info(exampleMap.toString());
+	public Example getExample(int id) {
+		return example;
+	}
 
-		return exampleMap.get("key1");
+	@Override
+	public Example createExample(Example example) {
+		return null;
 	}
 
 	@Override

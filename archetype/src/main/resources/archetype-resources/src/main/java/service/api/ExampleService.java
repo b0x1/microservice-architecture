@@ -6,6 +6,7 @@ package ${package}.service.api;
 import ${package}.service.model.Example;
 
 public interface ExampleService {
-    String createExample(Example example);
+    Example getExample(int id);
+    Example createExample(Example example);
     String getException();
 }

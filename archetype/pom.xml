@@ -9,7 +9,7 @@
   <version>1.0.0-SNAPSHOT</version>
   <packaging>maven-archetype</packaging>
 
-  <name>A Maven Archetype for Microservice Architecture based on Wildfly Swarm</name>
+  <name>A Maven Archetype for Microservice Architecture based on Thorntail</name>
 
   <build>
     <extensions>

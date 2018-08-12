@@ -15,10 +15,7 @@ swarm:
         KEY:
           properties:
             some.secret.data: "keep this a secret!"
-            service.map.data: >
-              key1 : val1 |
-              key2 : val2 |
-              key3 : val3
+            service.map.data: "dev-property"
 ---
 project:
   stage: test
@@ -30,10 +27,7 @@ swarm:
         KEY:
           properties:
             some.secret.data: "keep this a secret!"
-            service.map.data: >
-              key1 : val1 |
-              key2 : val2 |
-              key3 : val3
+            service.map.data: "test-property"
 ---
 # Necessary because config set via 'swarm.jaeger.*', breaks jaeger integration
 JAEGER_SERVICE_NAME: ${project.artifactId}

@@ -22,8 +22,14 @@ public class ExampleRestImpl implements ExampleRest {
 	private ExampleService exampleService;
 
 	@Override
-	public String createExample(@NotNull ExampleDto exampleDto) {
-		return exampleService.createExample(mapper.map(exampleDto, Example.class));
+	public ExampleDto getExample(int id) {
+		return mapper.map(exampleService.getExample(id), ExampleDto.class);
+	}
+
+	@Override
+	public ExampleDto createExample(@NotNull ExampleDto exampleDto) {
+		return mapper.map(exampleService.createExample(mapper.map(exampleDto, Example.class)),
+						  ExampleDto.class);
 	}
 
 	@Override

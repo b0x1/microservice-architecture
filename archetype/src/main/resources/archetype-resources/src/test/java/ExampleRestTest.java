@@ -50,11 +50,11 @@ public class ExampleRestTest {
     @RunAsClient
     public void testConfigMap() {
         // -- Given --
-        String result = exampleRest.createExample(new ExampleDto());
+        ExampleDto result = exampleRest.getExample(1);
 
         // -- Then --
         Assert.assertNotNull(result);
-        Assert.assertEquals("val1", result);
+        Assert.assertEquals("test-property", result.getSomeProperty());
     }
 
 
@@ -62,7 +62,7 @@ public class ExampleRestTest {
     @RunAsClient
     public void testExceptionHandling() {
         // -- When --
-        Response result = webTarget.path("/endpoint/exception").request().get();
+        Response result = webTarget.path("/example/exception").request().get();
 
         // -- Then --
         Assert.assertEquals(500, result.getStatus());
