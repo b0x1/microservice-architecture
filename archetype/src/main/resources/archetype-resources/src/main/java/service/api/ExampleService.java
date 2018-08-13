@@ -3,10 +3,10 @@
 #set( $symbol_escape = '\' )
 package ${package}.service.api;
 
-import ${package}.service.model.Example;
+import ${package}.data.model.Example;
 
 public interface ExampleService {
-    Example getExample(int id);
+    Example getExample(Long id);
     Example createExample(Example example);
     String getException();
 }

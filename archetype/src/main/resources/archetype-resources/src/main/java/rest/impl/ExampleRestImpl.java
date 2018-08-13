@@ -6,7 +6,7 @@ package ${package}.rest.impl;
 import ${package}.rest.api.ExampleRest;
 import ${package}.rest.model.ExampleDto;
 import ${package}.service.api.ExampleService;
-import ${package}.service.model.Example;
+import ${package}.data.model.Example;
 import org.dozer.Mapper;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -22,7 +22,7 @@ public class ExampleRestImpl implements ExampleRest {
 	private ExampleService exampleService;
 
 	@Override
-	public ExampleDto getExample(int id) {
+	public ExampleDto getExample(Long id) {
 		return mapper.map(exampleService.getExample(id), ExampleDto.class);
 	}
 

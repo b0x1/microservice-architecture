@@ -48,9 +48,20 @@ public class ExampleRestTest {
 
     @Test
     @RunAsClient
-    public void testConfigMap() {
+    public void testDB() {
         // -- Given --
-        ExampleDto result = exampleRest.getExample(1);
+        ExampleDto result = exampleRest.getExample(1L);
+
+        // -- Then --
+        Assert.assertNotNull(result);
+        Assert.assertEquals("db-property", result.getSomeProperty());
+    }
+
+    @Test
+    @RunAsClient
+    public void testConfigProperty() {
+        // -- Given --
+        ExampleDto result = exampleRest.getExample(0L);
 
         // -- Then --
         Assert.assertNotNull(result);
@@ -80,7 +91,9 @@ public class ExampleRestTest {
                                 .withTransitivity()
                                 .asFile())
                 .addAsResource("META-INF/beans.xml")
+                .addAsResource("META-INF/persistence.xml")
                 .addAsResource("META-INF/services/org.eclipse.microprofile.config.spi.Converter")
+                .addAsResource("load.sql")
                 .addAsResource("project-stages.yml");
 
         //If we want to see what has been packaged:

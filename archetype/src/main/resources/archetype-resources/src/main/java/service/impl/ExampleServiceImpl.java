@@ -3,9 +3,10 @@
 #set( $symbol_escape = '\' )
 package ${package}.service.impl;
 
-import ${package}.service.model.Example;
 import ${package}.service.api.ExampleService;
 import ${package}.service.exception.ServiceException;
+import ${package}.data.model.Example;
+import ${package}.data.Repository;
 import io.opentracing.contrib.cdi.Traced;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.slf4j.Logger;
@@ -20,12 +21,20 @@ public class ExampleServiceImpl implements ExampleService {
 	@Inject
 	Logger LOG;
 
+	@Inject
+	Repository repository;
+
 	@Inject @ConfigProperty(name="service.map.data")
 	private Example example;
 
 	@Override
-	public Example getExample(int id) {
-		return example;
+	public Example getExample(Long id) {
+		Example e = repository.findById(id);
+		if (e == null) {
+			return example;
+		} else {
+			return e;
+		}
 	}
 
 	@Override

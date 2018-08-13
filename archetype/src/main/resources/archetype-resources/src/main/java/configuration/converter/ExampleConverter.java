@@ -3,7 +3,7 @@
 #set( $symbol_escape = '\' )
 package ${package}.configuration.converter;
 
-import ${package}.service.model.Example;
+import ${package}.data.model.Example;
 import org.eclipse.microprofile.config.spi.Converter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

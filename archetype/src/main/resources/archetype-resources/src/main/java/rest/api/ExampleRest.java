@@ -30,7 +30,7 @@ public interface ExampleRest {
 	@Path("/example/{id}")
 	@Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
 	@Consumes(MediaType.APPLICATION_JSON)
-	ExampleDto getExample(@NotNull @PathParam("id") int exampleId);
+	ExampleDto getExample(@NotNull @PathParam("id") Long exampleId);
 
 	@ApiOperation("Throw an exception")
 	@ApiResponse(code=500, message="Intentional exception")

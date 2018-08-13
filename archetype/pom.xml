@@ -11,6 +11,10 @@
 
   <name>A Maven Archetype for Microservice Architecture based on Thorntail</name>
 
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
   <build>
     <extensions>
       <extension>
