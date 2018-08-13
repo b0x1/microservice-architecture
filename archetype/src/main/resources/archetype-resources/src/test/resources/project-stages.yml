@@ -1,0 +1,18 @@
+swarm:
+  http:
+    port: 8080
+  contex:
+    path: "/"
+  logging:
+---
+project:
+  stage: test
+swarm:
+  logging: INFO
+  microprofile:
+    config:
+      config-sources:
+        KEY:
+          properties:
+            some.secret.data: "keep this a secret!"
+            service.map.data: "test-property"

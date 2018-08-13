@@ -45,5 +45,14 @@
         <include>**/*.java</include>
       </includes>
     </fileSet>
+
+    <fileSet filtered="true" encoding="UTF-8">
+      <directory>src/test/resources</directory>
+      <includes>
+        <include>**/*.xml</include>
+        <include>**/*.yml</include>
+        <include>META-INF/services/*</include>
+      </includes>
+    </fileSet>
   </fileSets>
 </archetype-descriptor>

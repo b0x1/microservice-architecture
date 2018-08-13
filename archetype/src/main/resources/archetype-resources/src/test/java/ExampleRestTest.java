@@ -84,7 +84,7 @@ public class ExampleRestTest {
                 .addAsResource("project-stages.yml");
 
         //If we want to see what has been packaged:
-//        archive.as(ZipExporter.class).exportTo(new File(System.getenv("HOME") + "/" + archive.getName()), true);
+        archive.as(ZipExporter.class).exportTo(new File("target/" + archive.getName()), true);
 
         return archive;
     }

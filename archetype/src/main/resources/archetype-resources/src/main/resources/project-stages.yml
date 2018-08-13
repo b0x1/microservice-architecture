@@ -17,18 +17,6 @@ swarm:
             some.secret.data: "keep this a secret!"
             service.map.data: "dev-property"
 ---
-project:
-  stage: test
-swarm:
-  logging: INFO
-  microprofile:
-    config:
-      config-sources:
-        KEY:
-          properties:
-            some.secret.data: "keep this a secret!"
-            service.map.data: "test-property"
----
 # Necessary because config set via 'swarm.jaeger.*', breaks jaeger integration
 JAEGER_SERVICE_NAME: ${project.artifactId}
 JAEGER_AGENT_HOST: ${env.JAEGER_HOST}
