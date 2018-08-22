@@ -1,7 +1,7 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-package ${package}.service.impl;
+package ${package};
 
 import ${package}.service.api.ExampleService;
 import ${package}.service.exception.ServiceException;
@@ -13,11 +13,12 @@ import org.slf4j.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-
+import javax.enterprise.inject.Alternative;
 
 @ApplicationScoped
 @Traced
-public class ExampleServiceImpl implements ExampleService {
+@Alternative
+public class ExampleServiceMock implements ExampleService {
 	@Inject
 	Logger LOG;
 
